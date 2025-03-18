@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adopta a Lola - En busca de un hogar amoroso</title>
+    <!-- Uso de DaisyUI para componentes estáticos con diseño atractivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.min.css" rel="stylesheet">
+    <!-- Animaciones y efectos adicionales -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Fuentes más atractivas y variadas -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&family=Indie+Flower&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #ffe6eb 0%, #ffccd5 100%); /* Fondo con gradiente */
+            font-family: 'Quicksand', sans-serif;
+            color: #454545;
+        }
+
+        h1, h2, h3, .lola-message {
+            font-family: 'Fredoka', cursive;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Título principal animado */
+        .site-title {
+            font-size: 3.5rem;
+            background: linear-gradient(120deg, #ff6b6b, #ffa1c4, #a37ef0, #70c1ff);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: gradient-animation 8s ease infinite;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.1);
+            font-weight: 700;
+        }
+        
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50% }
+            50% { background-position: 100% 50% }
+            100% { background-position: 0% 50% }
+        }
+        
+        .dog-gallery img {
+            object-fit: cover;
+            border-radius: 1.5rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 5px solid white;
+        }
+        
+        .dog-gallery img:hover {
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .main-image {
+            width: 100%;
+            object-fit: cover;
+            border-radius: 1.5rem;
+            border: 6px solid white;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
+        }
+        
+        .main-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Ajuste para la primera imagen */
+        .first-image {
+            height: 320px;
+            object-position: center center;
+        }
+        
+        /* Ajuste para la segunda imagen */
+        .second-image {
+            height: 270px;
+            object-position: center;
+        }
+        
+        /* Ajuste para la imagen en la galería */
+        .distant-dog {
+            object-position: 50% 25%;
+            transform: scale(0.65); 
+            margin: 15px;
+        }
+        
+        /* Contenedor flexible para centrar mejor la imagen */
+        .centered-image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .info-card {
+            border-radius: 1.5rem;
+            transition: all 0.4s ease;
+            height: 100%;
+            border: none;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .info-card:before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            z-index: -1;
+            background: linear-gradient(45deg, #ff8a8a, #ffc9c9, #ffeaa7, #c3f0ca, #a7e9ff);
+            background-size: 400% 400%;
+            animation: border-animation 10s ease infinite;
+            border-radius: 1.6rem;
+            opacity: 0.7;
+        }
+        
+        @keyframes border-animation {
+            0% { background-position: 0% 50% }
+            50% { background-position: 100% 50% }
+            100% { background-position: 0% 50% }
+        }
+        
+        .info-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-body {
+            z-index: 1;
+        }
+        
+        /* Estilo mejorado para las huellas de los listados */
+        .paw-list li {
+            position: relative;
+            padding-left: 2.8rem;
+            margin-bottom: 1.2rem;
+            font-size: 1.15rem;
+            line-height: 1.6;
+            transition: transform 0.3s ease;
+        }
+        
+        .paw-list li:hover {
+            transform: translateX(5px);
+        }
+        
+        .paw-list li:before {
+            content: "🐾";
+            position: absolute;
+            left: 0;
+            font-size: 1.3rem;
+            animation: bounce 2s infinite;
+            animation-delay: calc(var(--i) * 0.2s);
+        }
+        
+        .paw-list li:nth-child(1):before { --i: 1; }
+        .paw-list li:nth-child(2):before { --i: 2; }
+        .paw-list li:nth-child(3):before { --i: 3; }
+        .paw-list li:nth-child(4):before { --i: 4; }
+        .paw-list li:nth-child(5):before { --i: 5; }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+        
+        /* Estructura mejorada para alineación exacta */
+        .main-container {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        @media (min-width: 768px) {
+            .main-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        .image-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+        }
+        
+        .text-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+            height: 100%;
+        }
+        
+        .image-wrapper {
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+        }
+        
+        .image-wrapper:hover {
+            transform: scale(1.02) rotate(-1deg);
+        }
+        
+        /* Mensaje de presentación con estilo más atractivo */
+        .lola-message {
+            background: linear-gradient(135deg, #fff8e6 0%, #ffeed0 100%);
+            border-radius: 2rem;
+            padding: 1.8rem;
+            font-size: 1.4rem;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 12px 25px -8px rgba(0, 0, 0, 0.15);
+            border: 3px dashed #ffc1cc;
+            color: #e67e22;
+            animation: float 3s ease-in-out infinite;
+            font-family: 'Indie Flower', cursive;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Colores específicos para las tarjetas */
+        .card-blue {
+            background: linear-gradient(135deg, #e0f7ff 0%, #d0f0ff 100%);
+        }
+        
+        .card-green {
+            background: linear-gradient(135deg, #e8fce8 0%, #d7f8d7 100%);
+        }
+        
+        /* Estilos para los títulos de las tarjetas */
+        .card-title-blue {
+            color: #3b82f6;
+            font-size: 2.2rem !important;
+            font-weight: 700;
+            text-shadow: 1px 1px 3px rgba(59, 130, 246, 0.2);
+        }
+        
+        .card-title-green {
+            color: #10b981;
+            font-size: 2.2rem !important;
+            font-weight: 700;
+            text-shadow: 1px 1px 3px rgba(16, 185, 129, 0.2);
+        }
+        
+        /* Iconos de corazón para los títulos */
+        .heart-blue {
+            color: #3b82f6;
+            animation: heartbeat 1.5s infinite;
+        }
+        
+        .heart-green {
+            color: #10b981;
+            animation: heartbeat 1.5s infinite;
+            animation-delay: 0.75s;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        /* ESTILOS PARA LA GALERÍA */
+        .gallery-title {
+            color: #e67e22;
+            font-size: 2.6rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            margin-top: 3rem;
+            text-shadow: 2px 2px 4px rgba(230, 126, 34, 0.2);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .gallery-title:after {
+            content: '';
+            position: absolute;
+            width: 70%;
+            height: 5px;
+            bottom: -10px;
+            left: 15%;
+            background: linear-gradient(90deg, transparent, #f8c291, transparent);
+            border-radius: 5px;
+        }
+        
+        .gallery-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 4.5rem;
+            padding: 0 1.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .gallery-item {
+            border-radius: 1.8rem;
+            overflow: hidden;
+            box-shadow: 0 15px 30px -8px rgba(0, 0, 0, 0.15);
+            background-color: white;
+            padding: 0.8rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .gallery-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 1.2rem;
+            transition: all 0.5s ease;
+        }
+        
+        .gallery-image:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Formulario con estilos mejorados */
+        .form-control label span {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #9b59b6;
+        }
+        
+        .input, .select, .textarea {
+            border: 2px solid #e5e7eb;
+            transition: all 0.3s ease;
+            font-size: 1.05rem;
+        }
+        
+        .input:focus, .select:focus, .textarea:focus {
+            border-color: #9b59b6;
+            box-shadow: 0 0 0 3px rgba(155, 89, 182, 0.2);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%) !important;
+            border: none !important;
+            font-size: 1.2rem !important;
+            font-weight: 600 !important;
+            padding: 0.8rem 2rem !important;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 10px 20px -5px rgba(243, 156, 18, 0.4) !important;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px) !important;
+            box-shadow: 0 15px 25px -5px rgba(243, 156, 18, 0.5) !important;
+            background: linear-gradient(135deg, #e67e22 0%, #d35400 100%) !important;
+        }
+        
+        /* Sección Sobre Mí con estilo mejorado */
+        .about-section {
+            background: linear-gradient(135deg, #fff8e6 0%, #ffefd1 100%);
+            border-radius: 2rem;
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: none;
+            position: relative;
+        }
+        
+        .about-section:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, #f9ca24, #f0932b, #eb4d4b);
+        }
+        
+        .about-title {
+            font-size: 2.5rem !important;
+            color: #b33939 !important;
+            font-weight: 700 !important;
+            margin-bottom: 1.5rem !important;
+            text-shadow: 1px 1px 3px rgba(179, 57, 57, 0.2);
+        }
+        
+        .about-text {
+            font-size: 1.15rem !important;
+            line-height: 1.8 !important;
+            margin-bottom: 1.5rem !important;
+        }
+        
+        /* Footer con estilo mejorado */
+        footer {
+            background: linear-gradient(135deg, #f1f9fe 0%, #dcf1fd 100%);
+            padding: 2rem;
+            border-radius: 1.5rem;
+            margin-top: 4rem;
+            box-shadow: 0 -10px 30px -15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .footer-text {
+            font-size: 1.1rem;
+            color: #3498db;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .copyright {
+            font-size: 1rem;
+            color: #7f8c8d;
+            margin-top: 1rem;
+        }
+        
+        /* Alerta con estilo mejorado */
+        .custom-alert {
+            background: linear-gradient(135deg, #e0f7ff 0%, #c7eeff 100%);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+            border-left: 6px solid #3498db;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .alert-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2980b9;
+            margin-bottom: 0.5rem;
+        }
+        
+        .alert-text {
+            font-size: 1.05rem;
+            color: #34495e;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <!-- Título principal animado -->
+        <h1 class="site-title animate__animated animate__bounceIn">¡Adopta a Lola! 🐾</h1>
+        
+        <!-- ESTRUCTURA PRINCIPAL MEJORADA -->
+        <div class="main-container">
+            <!-- Columna de imágenes -->
+            <div class="image-column">
+                <!-- Primera imagen -->
+                <div class="image-wrapper animate__animated animate__fadeInLeft">
+                    <img src="image_converted.jpg" alt="Lola esperando un hogar" class="main-image first-image" style="object-position: center;">
+                </div>
+                
+                <!-- Segunda imagen -->
+                <div class="image-wrapper animate__animated animate__fadeInLeft" style="animation-delay: 0.3s">
+                    <img src="20220803_204604.jpg" alt="Lola esperando un hogar" class="main-image second-image" style="object-position: center;"> 
+                </div>
+                
+                <!-- Mensaje de presentación -->
+                <div class="lola-message animate__animated animate__fadeInUp">
+                    <p>🐾 ¡Hola! Soy Lola y estoy buscando una familia que me quiera. ¿Podrías ser tú? 🐾</p>
+                </div>
+            </div>
+            
+            <!-- Columna de información -->
+            <div class="text-column">
+                <!-- Primera tarjeta - info básica -->
+                <div class="card shadow-xl info-card card-blue animate__animated animate__fadeInRight">
+                    <div class="card-body">
+                        <h2 class="card-title card-title-blue">💙 ¿Quién soy? 💙</h2>
+                        <ul class="paw-list">
+                            <li><strong>Nombre:</strong> Lola</li>
+                            <li><strong>Tamaño:</strong> Mediano</li>
+                            <li><strong>Peso:</strong> 22 kilos</li>
+                            <li><strong>Raza:</strong> Mestiza</li>
+                            <li><strong>Personalidad:</strong> Muy cariñosa con las personas</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Segunda tarjeta - hogar necesario -->
+                <div class="card shadow-xl info-card card-green animate__animated animate__fadeInRight" style="animation-delay: 0.3s">
+                    <div class="card-body">
+                        <h2 class="card-title card-title-green">💚 ¿Qué hogar necesito? 💚</h2>
+                        <p class="mb-4 text-lg">Debido a que tengo un poco de ansiedad, busco un hogar donde:</p>
+                        <ul class="paw-list">
+                            <li>Pueda ser la única mascota o</li>
+                            <li>Si hay otro perro, se me permita una introducción gradual</li>
+                            <li>Tenga personas pacientes que entiendan mi personalidad</li>
+                            <li>Reciba mucho amor y atención</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sobre Lola con estilo mejorado -->
+        <div class="card shadow-xl mb-16 about-section animate__animated animate__fadeIn" style="animation-delay: 0.6s">
+            <div class="card-body">
+                <h2 class="card-title about-title">Sobre mí</h2>
+                <p class="about-text">
+                    Soy una perrita muy cariñosa con las personas. Me encanta recibir mimos y estar cerca de mi familia humana. 
+                    Tengo mucho amor para dar y soy muy agradecida. 🥰
+                </p>
+                <p class="about-text">
+                    Debido a algunas experiencias pasadas, tengo un poco de ansiedad que a veces me hace estar a la defensiva con otros perros. 
+                    Esto no significa que no pueda convivir con otros perritos, pero necesito tiempo y paciencia para adaptarme. 🐕‍🦺
+                </p>
+                <p class="about-text">
+                    Sería ideal para mí estar en un hogar donde sea la única mascota, pero si tienes otro perro y mucha paciencia, 
+                    podríamos intentar una introducción gradual y respetuosa. 💝
+                </p>
+            </div>
+        </div>
+
+        <!-- GALERÍA DE IMÁGENES REDISEÑADA -->
+        <h2 class="gallery-title animate__animated animate__fadeIn" style="animation-delay: 0.8s">Conoce más de mí</h2>
+        <div class="gallery-container">
+            <div class="gallery-item animate__animated animate__zoomIn" style="animation-delay: 0.9s">
+                <img src="20220803_204207.jpg" alt="Lola en casa" class="gallery-image" style="object-position: center 70%;">
+            </div>
+            <div class="gallery-item animate__animated animate__zoomIn" style="animation-delay: 1.1s">
+                <img src="20230408_131734.jpg" alt="Lola descansando" class="gallery-image" style="object-position: center 70%;">
+            </div>
+            <div class="gallery-item animate__animated animate__zoomIn" style="animation-delay: 1.3s">
+                <img src="20230409_122537.jpg" alt="Lola recostada" class="gallery-image" style="object-position: center 70%;">
+            </div>
+        </div>
+
+        <!-- Formulario de contacto con estilo mejorado -->
+        <div class="card shadow-xl mb-12 info-card animate__animated animate__fadeIn" style="animation-delay: 1.5s; background: linear-gradient(135deg, #fce6f5 0%, #f8d1ec 100%);">
+            <div class="card-body">
+                <h2 class="card-title text-3xl mb-4" style="color: #9b59b6; font-weight: 700; font-size: 2.4rem; text-shadow: 1px 1px 3px rgba(155, 89, 182, 0.2);">¿Quieres adoptarme?</h2>
+                <p class="text-lg mb-6">
+                    Si crees que puedes darme el hogar que necesito, ¡me encantaría conocerte! 🏠❤️
+                    Completa el formulario y pronto nos pondremos en contacto contigo.
+                </p>
+                
+                <form class="grid md:grid-cols-2 gap-6">
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Nombre completo</span>
+                        </label>
+                        <input type="text" placeholder="Tu nombre" class="input input-bordered" />
+                    </div>
+                    
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Correo electrónico</span>
+                        </label>
+                        <input type="email" placeholder="tu@email.com" class="input input-bordered" />
+                    </div>
+                    
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Teléfono</span>
+                        </label>
+                        <input type="tel" placeholder="Tu número de teléfono" class="input input-bordered" />
+                    </div>
+                    
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">¿Tienes otras mascotas?</span>
+                        </label>
+                        <select class="select select-bordered">
+                            <option disabled selected>Selecciona una opción</option>
+                            <option>No, Lola sería mi única mascota</option>
+                            <option>Sí, tengo otro(s) perro(s)</option>
+                            <option>Sí, tengo gato(s)</option>
+                            <option>Sí, tengo otras mascotas</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-control md:col-span-2">
+                        <label class="label">
+                            <span class="label-text">¿Por qué quieres adoptar a Lola?</span>
+                        </label>
+                        <textarea class="textarea textarea-bordered h-24" placeholder="Cuéntanos un poco sobre ti y por qué quieres adoptar a Lola"></textarea>
+                    </div>
+                    
+                    <div class="form-control md:col-span-2">
+                        <button class="btn btn-primary">💕 Enviar solicitud 💕</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Información adicional con estilo mejorado -->
+        <div class="custom-alert animate__animated animate__fadeIn" style="animation-delay: 1.7s">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info flex-shrink-0 w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <div>
+                <h3 class="alert-title">🐶 Proceso de adopción</h3>
+                <p class="alert-text">Realizamos un proceso de seguimiento para asegurar que Lola vaya a un hogar adecuado. Esto incluye una entrevista, visita al hogar y un período de adaptación.</p>
+            </div>
+        </div>
+
+        <!-- Pie de página con estilo mejorado -->
+        <footer class="animate__animated animate__fadeIn" style="animation-delay: 1.9s">
+            <p class="footer-text text-center">❤️ Gracias por considerar la adopción. Los animales rescatados son eternamente agradecidos ❤️</p>
+            <p class="copyright text-center">🐾 © 2025 Adopción Responsable 🐾</p>
+        </footer>
+    </div>
+</body>
+</html>
